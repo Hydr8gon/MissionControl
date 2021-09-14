@@ -136,6 +136,17 @@ namespace ams::controller {
             static_cast<uint16_t>(stick_scale_factor * (UINT8_MAX - src->input0x31.right_stick.y)) & 0xfff
         );
 
+        if (m_enable_motion) {
+            for (int i = 0; i < 3; i++) {
+                m_motion_data[i].accel_x = -src->input0x31.acc_z / 2; // y
+                m_motion_data[i].accel_y = -src->input0x31.acc_x / 5; // x
+                m_motion_data[i].accel_z =  src->input0x31.acc_y / 2; // z
+                m_motion_data[i].gyro_1 = -src->input0x31.vel_z / 5; // y
+                m_motion_data[i].gyro_2 = -src->input0x31.vel_x / 5; // x
+                m_motion_data[i].gyro_3 =  src->input0x31.vel_y / 5; // z
+            }
+        }
+
         this->MapButtons(&src->input0x31.buttons);
     }
 

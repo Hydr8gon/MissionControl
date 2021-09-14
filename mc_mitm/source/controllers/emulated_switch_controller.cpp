@@ -142,6 +142,7 @@ namespace ams::controller {
         auto config = mitm::GetGlobalConfig();
 
         m_enable_rumble = config->general.enable_rumble;
+        m_enable_motion = config->general.enable_motion;
     };
 
     EmulatedSwitchController::~EmulatedSwitchController() {
